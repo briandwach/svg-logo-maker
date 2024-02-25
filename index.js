@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const shapesArray = require('./lib/shapes.js');
+const Text = require('./lib/text.js');
 // const fs = require('fs');
 // const generateMarkdownAsync = require('./utils/generateMarkdown.js');
 
