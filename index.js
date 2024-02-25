@@ -1,12 +1,11 @@
 const inquirer = require('inquirer');
+const shapesArray = require('./lib/shapes.js');
 // const fs = require('fs');
 // const generateMarkdownAsync = require('./utils/generateMarkdown.js');
 
 // Each prompt is an array fed into Inquirer to be prompt object members.
 // Index 0: type, Index 1: name, Index 2: message, 
 // Index 3: choices, Index 4: loop, Index 5: default
-
-const shapesArray = ['Circle', 'Triangle', 'Square'];
 
 const prompts = [
     ['input', 'text', 'Enter logo text (maximum of 3 characters):'],
