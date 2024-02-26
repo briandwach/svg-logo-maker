@@ -13,6 +13,7 @@ const prompts = [
     ['input', 'shapeColor', 'Enter color for shape (ex. red, or enter a hexadecimal number):'],
 ];
 
+// Begins asynchronous iterations of Inquirer prompts for the user
 async function startPromptsAsync(promptsArray) {
     var responses = {};
 
@@ -20,17 +21,18 @@ async function startPromptsAsync(promptsArray) {
         const response = await promptForUserInput(promptsArray[p]);
         responses[Object.keys(response)[0]] = Object.values(response)[0];
     }
+    // Render user input object to the terminal
     console.log(responses);
 
     compileRender(responses);
 };
 
-// Inquirer function for collecting user input: iterates through array to render questions
+// Inquirer function for collecting user input
 function promptForUserInput(currentPrompt) {
     return inquirer.prompt(currentPrompt);
 };
 
-
+// Utilizes imported modules to compile strings and calls for logo generation
 function compileRender(responses) {
 
     switch (responses.shape) {
@@ -50,7 +52,7 @@ function compileRender(responses) {
     generateLogo(shape.render(), text.render());
 }
 
-
+// Creates a final array of user prompt questions and calls for intitial prompt
 function init() {
     const promptsArray = [];
     for (prompt of prompts) {
