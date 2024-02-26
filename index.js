@@ -1,8 +1,10 @@
 const inquirer = require('inquirer');
-const shapesArray = require('./lib/shapes.js');
 const Text = require('./lib/text.js');
-// const fs = require('fs');
-// const generateMarkdownAsync = require('./utils/generateMarkdown.js');
+const shapesArray = require('./lib/shapes.js');
+const Circle = require('./lib/shapes.js');
+const Triangle = require('./lib/shapes.js');
+const Square = require('./lib/shapes.js');
+const generateLogo = require('./lib/write.js');
 
 // Each prompt is an array fed into Inquirer to be prompt object members.
 // Index 0: type, Index 1: name, Index 2: message, 
@@ -22,6 +24,8 @@ async function startPromptsAsync(promptsArray) {
         responses[Object.keys(response)[0]] = Object.values(response)[0];
     }
     console.log(responses);
+
+    //compileRender(responses);
 };
 
 // Inquirer function for collecting user input: iterates through array to render questions
@@ -29,24 +33,28 @@ function promptForUserInput(currentPrompt) {
     return inquirer.prompt(currentPrompt);
 };
 
-// Calls function from generateMarkdown.js to generate markdown
-// async function sendToMarkdownFile(readmeContent, licenseData) {
-//    if (readmeContent.license !== 'None') {
-//        var licenseKey = getLicenseKey(readmeContent.license, licenseData);
-//    } else {
-//        var licenseKey = 'None';
-//    }
-//   let markdownContent = await generateMarkdownAsync(readmeContent, licenseKey);
-//    writeToFile(markdownContent);
-//}
 
-// Writes final README file to the generated directory
-// function writeToFile(markdownContent) {
-//     fs.writeFile('./generated/README.md', markdownContent, (err) =>
-//        err ? console.error(err) : console.log('README successfully written to /generated directory!'))
-//};
+function compileRender(responses) {
+    console.log('We got here');
+    //const shape = new responses.shape(responses.shapeColor);
+    //switch (responses.shape) {
+    //    case 'Circle':
+    //        
+    //        break;
+    //;
+    //case 'Square': 
+    //const shape = new Square(response.shapeColor);
+    //break;
+    //case 'Triangle':
+    //    const shape = new response.shapeColor
+    //}
+    
+    const text = new Text(responses.text, responses.textColor);
 
-// Calls the function to initiate Inquirer and prompt for user input
+    generateLogo(shape.render(), text.render());
+}
+
+
 function init() {
     const promptsArray = [];
     for (prompt of prompts) {
