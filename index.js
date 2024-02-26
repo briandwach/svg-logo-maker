@@ -3,17 +3,19 @@ const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt');
 inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt);
 
 const Text = require('./lib/text.js');
+const validateColor = require('./lib/color.js');
 const shapes = require('./lib/shapes.js');
 const generateLogo = require('./lib/write.js');
 
+
 // Each prompt is an array fed into Inquirer to be prompt object members.
 // Index 0: type, Index 1: name, Index 2: message, 
-// Index 3: choices, Index 4: loop, Index 5: maxLength
+// Index 3: choices, Index 4: loop, Index 5: maxLength, Index 6:validate
 const prompts = [
     ['maxlength-input', 'text', 'Enter text for logo:', '', '', '3'],
-    ['input', 'textColor', 'Enter color for text (ex. purple, or enter a hexadecimal number):'],
+    ['input', 'textColor', 'Enter color for text (ex. purple, or #800080):', '', '', '', validateColor],
     ['list', 'shape', 'Choose a shape:', shapes.shapesArray, false],
-    ['input', 'shapeColor', 'Enter color for shape (ex. red, or enter a hexadecimal number):'],
+    ['input', 'shapeColor', 'Enter color for shape (ex. red, or #FF0000):', '', '', '', validateColor]
 ];
 
 // Begins asynchronous iterations of Inquirer prompts for the user
@@ -59,8 +61,8 @@ function compileRender(responses) {
 function init() {
     const promptsArray = [];
     for (prompt of prompts) {
-        const [type, name, message, choices, loop, maxLength] = prompt;
-        promptsArray.push({ type: type, name: name, message: message, choices: choices, loop: loop, maxLength: maxLength });
+        const [type, name, message, choices, loop, maxLength, validate] = prompt;
+        promptsArray.push({ type: type, name: name, message: message, choices: choices, loop: loop, maxLength: maxLength, validate: validate });
     };
     startPromptsAsync(promptsArray);
 };
