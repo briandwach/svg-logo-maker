@@ -19,17 +19,16 @@ const prompts = [
 ];
 
 // Begins asynchronous iterations of Inquirer prompts for the user
-async function startPromptsAsync(promptsArray) {
-    var responses = {};
+async function startPromptsAsync(prompts) {
+    const promptsArray = [];
+    for (prompt of prompts) {
+        const [type, name, message, choices, loop, maxLength, validate] = prompt;
+        promptsArray.push({ type: type, name: name, message: message, choices: choices, loop: loop, maxLength: maxLength, validate: validate });
+    };
 
-    for (var p = 0; p < promptsArray.length; p++) {
-        const response = await promptForUserInput(promptsArray[p]);
-        responses[Object.keys(response)[0]] = Object.values(response)[0];
-    }
-    // Render user input object to the terminal
-    console.log(responses);
+    const response = await promptForUserInput(promptsArray);
 
-    compileRender(responses);
+    compileRender(response);
 };
 
 // Inquirer function for collecting user input
@@ -59,12 +58,7 @@ function compileRender(responses) {
 
 // Creates a final array of user prompt questions and calls for intitial prompt
 function init() {
-    const promptsArray = [];
-    for (prompt of prompts) {
-        const [type, name, message, choices, loop, maxLength, validate] = prompt;
-        promptsArray.push({ type: type, name: name, message: message, choices: choices, loop: loop, maxLength: maxLength, validate: validate });
-    };
-    startPromptsAsync(promptsArray);
+    startPromptsAsync(prompts);
 };
 
 // Calls initiliazation of application
