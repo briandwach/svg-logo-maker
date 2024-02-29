@@ -56,7 +56,6 @@ function compileRender(responses) {
     generateLogo(shape.render(), text.render());
 }
 
-// Creates a final array of user prompt questions and calls for intitial prompt
 function init() {
     startPromptsAsync(prompts);
 };
